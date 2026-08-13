@@ -1,0 +1,92 @@
+.iconContainer {
+  display: flex;
+  align-items: flex-start; // Aligne toutes les colonnes vers le haut
+  gap: 1px;                // Espace entre chaque double-barre (ajuste au besoin)
+  width: fit-content;
+  height: auto;
+}
+
+.barColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 3px;
+
+  // --- APPLICATION DES TRANSLATIONS DIFFÉRENTES PAR BARRE ---
+
+  // Colonne 1 (Tout à gauche)
+  &:nth-of-type(1) .barGradient2 {
+    animation: floatUpMedium 1.5s ease-in-out infinite alternate;
+  }
+
+  // Colonne 2
+  &:nth-of-type(2) .barGradient2 {
+    animation: floatUpMax 1.5s ease-in-out infinite alternate;
+  }
+
+  // Colonne 3 (Milieu)
+  &:nth-of-type(3) .barGradient2 {
+    animation: floatUpMin 1.5s ease-in-out infinite alternate;
+  }
+
+  // Colonne 4
+  &:nth-of-type(4) .barGradient2 {
+    animation: floatUpMedium 1.5s ease-in-out infinite alternate;
+  }
+
+  // Colonne 5 (Tout à droite)
+  &:nth-of-type(5) .barGradient2 {
+    animation: floatUpMedium 1.5s ease-in-out infinite alternate;
+  }
+}
+
+// Barres du haut (Orange vers Rouge)
+.barGradient2 {
+  width: 3.2px;
+  border-radius: 20px; 
+  background: linear-gradient(180deg, #F99885 0%, #DF392B 100%);
+  position: relative;
+  z-index: 2;
+  transform-origin: bottom center;
+}
+
+// Barres du bas (Rouge vers Bleu/Violet)
+.barGradient1 {
+  width: 3.2px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #DF392B 0%, #5465F7 100%);
+  position: relative;
+  z-index: 1;
+}
+
+// --- KEYFRAMES AVEC EFFET DE PAUSE AUX EXTRÉMITÉS ---
+
+// Grosse amplitude (Déplacement de 8px)
+@keyframes floatUpMax {
+  0%, 10% {
+    transform: translateY(7px); // Reste bloqué en bas au début
+  }
+  80%, 100% {
+    transform: translateY(0px); // Reste bloqué en haut à la fin
+  }
+}
+
+// Amplitude moyenne (Déplacement de 5px)
+@keyframes floatUpMedium {
+  0%, 10% {
+    transform: translateY(5px);
+  }
+  80%, 100% {
+    transform: translateY(0px);
+  }
+}
+
+// Petite amplitude (Déplacement de 2px)
+@keyframes floatUpMin {
+  0%, 10% {
+    transform: translateY(2px);
+  }
+  80%, 100% {
+    transform: translateY(0px);
+  }
+}

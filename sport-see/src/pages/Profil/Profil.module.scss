@@ -1,0 +1,262 @@
+// Variables de design (Design Tokens)
+$font-family: 'Inter', sans-serif;
+$color-primary: var(--Tokens-Typographie-Primary, #111111);
+$color-secondary: var(--Tokens-Typographie-Secondary, #707070);
+$color-tertiary: var(--Tokens-Typographie-Tertiary, #E7E7E7);
+$color-blue-surface: var(--Tokens-Surface-Bleu, #0B23F4);
+$color-blue-light: var(--Tokens-Surface-Light-bleu, #B6BDFC);
+$shadow-default: 0px 4px 84px -40px rgba(157, 167, 251, 0.40);
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 57px;
+  align-items: flex-start;
+  font-family: $font-family;
+  text-align: center;
+}
+
+// --- Style Colonne Profil ---
+.profileColumn {
+  width: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.profileWrapper {
+  width: 508px;
+  height: 717px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.userCard {
+  width: 100%;
+  position: relative;
+  box-shadow: var(--shadow-drop);
+  border-radius: var(--br-10);
+  background-color: var(--color-white);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-24) 52px var(--padding-24) 32px;
+  box-sizing: border-box;
+  gap: 24px;
+  text-align: left;
+  font-size: 22px;
+  color: var(--color-gray);
+  font-family: var(--font-inter);
+
+  .photoProfilCadre {
+    height: 117px;
+    width: 104px;
+    border-radius: 10px; 
+    box-shadow: 0px 4px 84px -40px rgba(157, 167, 251, 0.4);
+    overflow: hidden;   
+    position: relative;
+  }
+  .avatar {
+	  height: 100%;
+    width: 100%;
+    object-fit: cover;  
+    transform-origin: center center; 
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .photoProfilCadre:hover .avatar {
+    transform: scale(1.3); 
+    cursor: pointer;
+  }
+  .userInfo {
+    flex: 1 1 0;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .userName {
+    align-self: stretch;
+    color: $color-primary;
+    font-size: 22px;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+
+  .userMeta {
+    align-self: stretch;
+    color: $color-secondary;
+    font-size: 14px;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+}
+
+.detailsCard {
+  width: 100%;
+  position: relative;
+  box-shadow: 0px 4px 84px -40px rgba(157, 167, 251, 0.4);
+  border-radius: 10px;
+  background-color: var(--color-white);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 40px 28px 60px;
+  box-sizing: border-box;
+  gap: 32px;
+  text-align: left;
+  font-size: 22px;
+  color: var(--color-gray);
+  font-family: var(--font-inter);
+
+  .cardHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .cardTitle {
+    color: $color-primary;
+    font-size: 22px;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+
+  .separator {
+    width: 100%;
+    height: 1px;
+    position: relative;
+    border-top: 1px solid var(--color-gainsboro);
+    box-sizing: border-box;
+  }
+
+  .infoList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .infoItem {
+    align-self: stretch;
+    color: $color-secondary;
+    font-size: 16px;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+}
+
+// --- Style Colonne Statistiques ---
+.statsColumn {
+  height: 512px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  text-align: left;
+  font-size: var(--fs-22);
+  color: var(--color-gray);
+  font-family: var(--font-inter);
+}
+
+.statsHeader {
+  width: 355px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+
+  .statsTitle {
+    align-self: stretch;
+    color: $color-primary;
+    font-size: 22px;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+
+  .statsSubtitle {
+    align-self: stretch;
+    color: $color-secondary;
+    font-size: 14px;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+}
+
+.statsGrid {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 19px;
+}
+
+.gridColumn {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 19px;
+}
+
+.statBox {
+  width: 278px;
+  padding: 20px 30px;
+  background: $color-blue-surface;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 19px;
+
+  .statLabel {
+    color: var(--Tokens-Surface-White, white);
+    font-size: 14px;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+
+  .statValueWrapper {
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .mainValue {
+    color: var(--Tokens-Surface-White, white);
+    font-size: 22px;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+
+  .subValue {
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: $color-blue-light;
+    font-size: 16px;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+}
