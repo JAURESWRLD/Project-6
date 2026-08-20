@@ -1,11 +1,18 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, lazy, Suspense } from "react";
 import styles from "./Performance.module.scss";
 import { useAuth } from "../../hooks/useAuth";
 import { useUserActivities } from "../../hooks/useUserActivity";
 import IconLogo from "../Logo/Logo";
-import { DistanceChart } from "./Charts/DistanceChart";
-import { HeartRateChart } from "./Charts/HeartChart";
-import { WeeklyStats } from "./Charts/WeeklyStats";
+
+// Lazy-loaded charts to reduce initial bundle size
+const DistanceChart = lazy(() =>
+  import("./Charts/DistanceChart").then((mod) => ({ default: mod.DistanceChart }))
+);
+const HeartRateChart = lazy(() =>
+  import("./Charts/HeartChart").then((mod) => ({ default: mod.HeartRateChart }))
+);
+const WeeklyStats = lazy(() => import("./Charts/WeeklyStats"));
+
 import {
   formatDateToAPI,
   getStartOfWeek,
@@ -100,23 +107,28 @@ const Performance = () => {
   useEffect(() => {
     if (!user || initialRangeSet || loading || error) return;
 
-    const validSessions = getValidSessions(allActivities);
-    if (validSessions.length === 0) {
+    const applyInitialRange = () => {
+      const validSessions = getValidSessions(allActivities);
+
+      if (validSessions.length === 0) {
+        setInitialRangeSet(true);
+        return;
+      }
+
+      const earliestWeek = getEarliestWeekRange(validSessions);
+
+      if (earliestWeek) {
+        setHeartDateRange(earliestWeek);
+        setDistanceDateRange({
+          start: earliestWeek.start,
+          end: getEndOf4Weeks(earliestWeek.start),
+        });
+      }
+
       setInitialRangeSet(true);
-      return;
-    }
+    };
 
-    const earliestWeek = getEarliestWeekRange(validSessions);
-
-    if (earliestWeek) {
-      setHeartDateRange(earliestWeek);
-      setDistanceDateRange({
-        start: earliestWeek.start,
-        end: getEndOf4Weeks(earliestWeek.start),
-      });
-    }
-
-    setInitialRangeSet(true);
+    queueMicrotask(applyInitialRange);
   }, [user, allActivities, loading, error, initialRangeSet]);
 
   // DONNÉES DISTANCE
@@ -168,32 +180,36 @@ const Performance = () => {
       <h2>Vos dernières performances</h2>
 
       <div className={styles.charts}>
-        <DistanceChart
-          styles={styles}
-          averageDistance={averageDistance}
-          distanceDateRange={distanceDateRange}
-          handleDistancePrev={handleDistancePrev}
-          handleDistanceNext={handleDistanceNext}
-          distanceData={distanceData}
-          hoveredIndex={hoveredIndex}
-          setHoveredIndex={setHoveredIndex}
-        />
+        <Suspense fallback={<div style={{width: '100%', minHeight: 360, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Chargement des graphiques…</div>}>
+          <DistanceChart
+            styles={styles}
+            averageDistance={averageDistance}
+            distanceDateRange={distanceDateRange}
+            handleDistancePrev={handleDistancePrev}
+            handleDistanceNext={handleDistanceNext}
+            distanceData={distanceData}
+            hoveredIndex={hoveredIndex}
+            setHoveredIndex={setHoveredIndex}
+          />
 
-        <HeartRateChart
-          styles={styles}
-          heartAverageBpm={heartAverageBpm}
-          heartDateRange={heartDateRange}
-          handleHeartPrev={handleHeartPrev}
-          handleHeartNext={handleHeartNext}
-          heartRateData={heartRateData}
-        />
+          <HeartRateChart
+            styles={styles}
+            heartAverageBpm={heartAverageBpm}
+            heartDateRange={heartDateRange}
+            handleHeartPrev={handleHeartPrev}
+            handleHeartNext={handleHeartNext}
+            heartRateData={heartRateData}
+          />
+        </Suspense>
       </div>
 
-      <WeeklyStats
-        styles={styles}
-        heartDateRange={heartDateRange}
-        weeklyStats={weeklyStats}
-      />
+      <Suspense fallback={<div style={{width: '100%', minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Chargement des statistiques…</div>}>
+        <WeeklyStats
+          styles={styles}
+          heartDateRange={heartDateRange}
+          weeklyStats={weeklyStats}
+        />
+      </Suspense>
     </section>
   );
 };

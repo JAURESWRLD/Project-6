@@ -1,16 +1,45 @@
-# React + Vite
+﻿# SportSee
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application de suivi sportif et d’analyse de performance pour le projet SportSee.
 
-Currently, two official plugins are available:
+## Prérequis
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 18+
+- npm
+- Un backend API SportSee démarré localement sur `http://localhost:8000`
 
-## React Compiler
+## Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Installer les dépendances :
+   ```bash
+   npm install
+   ```
+2. Copier le fichier d’environnement :
+   ```bash
+   copy .env.example .env
+   ```
+3. Vérifier la configuration dans `.env` :
+   ```env
+   VITE_USE_MOCK=false
+   VITE_API_URL=http://localhost:8000/api
+   VITE_ASSET_URL=http://localhost:8000
+   ```
 
-## Expanding the ESLint configuration
+## Démarrage
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run dev
+```
+
+## Authentification
+
+L’application suit une session utilisateur stockée dans le `sessionStorage` sous la clé `sportsee_user`.
+Le backend doit renvoyer un JWT valide pour autoriser les requêtes API.
+
+## Scripts
+
+```bash
+npm run dev
+npm run build
+npm run lint
+```

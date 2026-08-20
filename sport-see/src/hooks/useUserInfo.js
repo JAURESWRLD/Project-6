@@ -10,25 +10,34 @@ export const useUserInfo = (enabled = true) => {
     let isMounted = true;
 
     if (!enabled) {
-      setLoading(false);
       return () => {
         isMounted = false;
       };
     }
 
-    setLoading(true);
-    setError(null);
+    const loadUserInfo = async () => {
+      if (isMounted) {
+        setLoading(true);
+        setError(null);
+      }
 
-    fetchUserInfo()
-      .then((result) => {
-        if (isMounted) setData(result);
-      })
-      .catch((requestError) => {
-        if (isMounted) setError(requestError);
-      })
-      .finally(() => {
-        if (isMounted) setLoading(false);
-      });
+      try {
+        const result = await fetchUserInfo();
+        if (isMounted) {
+          setData(result);
+        }
+      } catch (requestError) {
+        if (isMounted) {
+          setError(requestError);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadUserInfo();
 
     return () => {
       isMounted = false;

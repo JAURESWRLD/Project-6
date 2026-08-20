@@ -1,35 +1,37 @@
-export async function generateTrainingPlan(goalData) {
-  let token = "";
-  try {
-    token = JSON.parse(sessionStorage.getItem("sportsee_user") || "null")?.token || "";
-  } catch {
-    token = "";
-  }
+﻿export async function generateTrainingPlan(goalData) {
+  const storedUser = (() => {
+    try {
+      return JSON.parse(sessionStorage.getItem("sportsee_user") || "null");
+    } catch {
+      return null;
+    }
+  })();
+
+  const token = storedUser?.token || "";
   const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   const response = await fetch(`${API_BASE_URL}/training-plan`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': token ? `Bearer ${token}` : ''
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    body: JSON.stringify(goalData) 
+    body: JSON.stringify(goalData),
   });
 
-  // 1. On vérifie d'abord si le serveur a répondu avec du HTML (ex: 404 ou 500)
   const contentType = response.headers.get("content-type");
   if (!contentType || !contentType.includes("application/json")) {
     const textError = await response.text();
     console.error("Réponse non-JSON reçue du serveur :", textError);
-    throw new Error(`Le serveur a renvoyé du HTML (Statut: ${response.status}). Vérifie l'URL de l'API.`);
+    throw new Error(
+      `Le serveur a renvoyé du HTML (Statut: ${response.status}). Vérifie l'URL de l'API.`
+    );
   }
 
-  // 2. Si la réponse n'est pas OK mais est bien en JSON
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.message || errorData.error || 'Erreur lors de la génération.');
+    throw new Error(errorData.message || errorData.error || "Erreur lors de la génération.");
   }
 
-  // 3. Réponse valide
   return await response.json();
 }
