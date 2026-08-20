@@ -1,211 +1,92 @@
 .footer {
-  	width: 100%;
-  	position: relative;
-  	background-color: var(--color-white);
-  	overflow: hidden;
-  	display: flex;
-  	align-items: center;
-  	justify-content: space-between;
-  	padding: 10px 100px;
-  	box-sizing: border-box;
-  	gap: 20px;
-  	text-align: left;
-  	font-size: var(--fs-14);
-  	color: var(--color-gray);
-  	font-family: var(--font-inter);
-}
-.sportseeParent {
-  	display: flex;
-  	align-items: center;
-  	gap: 9px;
-}
-.sportsee {
-  	position: relative;
-}
-.conditionsGnralesParent {
-  	width: 264px;
-  	display: flex;
-  	align-items: center;
-  	gap: 16px;
-}
-.contact {
-  	flex: 1;
-  	position: relative;
-}
-.logo {
-  	display: flex;
-  	align-items: center;
-  	justify-content: center;
-}
-.iconLogo {
-  	height: 20.7px;
-  	width: 19px;
-  	position: relative;
-  	transform:  rotate(180deg);
-}
-.rectangleParent {
-  	position: absolute;
-  	height: 100%;
-  	width: 15.79%;
-  	top: 99.79%;
-  	right: 5.26%;
-  	bottom: -99.79%;
-  	left: 78.95%;
-  	transform:  rotate(180deg);
-  	transform-origin: 0 0;
-}
-.groupChild {
-  	position: absolute;
-  	height: 72.46%;
-  	width: 100%;
-  	top: 27.32%;
-  	right: 0%;
-  	bottom: 0.21%;
-  	left: 0%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-1);
-}
-.groupItem {
-  	position: absolute;
-  	height: 67.63%;
-  	width: 100%;
-  	top: 0%;
-  	right: 0%;
-  	bottom: 32.37%;
-  	left: 0%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-2);
-}
-.rectangleGroup {
-  	position: absolute;
-  	height: 83.57%;
-  	width: 15.79%;
-  	top: 16.08%;
-  	right: 84.21%;
-  	bottom: 0.35%;
-  	left: 0%;
-}
-.groupInner {
-  	position: absolute;
-  	height: 34.68%;
-  	width: 100%;
-  	top: 34.68%;
-  	right: -100%;
-  	bottom: 30.64%;
-  	left: 100%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-1);
-  	transform:  rotate(180deg);
-  	transform-origin: 0 0;
-}
-.rectangleDiv {
-  	position: absolute;
-  	height: 80.92%;
-  	width: 100%;
-  	top: 19.24%;
-  	right: 0%;
-  	bottom: -0.16%;
-  	left: 0%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-2);
-}
-.rectangleContainer {
-  	position: absolute;
-  	height: 72.46%;
-  	width: 15.79%;
-  	top: 3.17%;
-  	right: 63.16%;
-  	bottom: 24.37%;
-  	left: 21.05%;
-}
-.groupChild2 {
-  	position: absolute;
-  	height: 60%;
-  	width: 100%;
-  	top: 60%;
-  	right: -100%;
-  	bottom: -20%;
-  	left: 100%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-1);
-  	transform:  rotate(180deg);
-  	transform-origin: 0 0;
-}
-.groupChild3 {
-  	position: absolute;
-  	height: 60%;
-  	width: 100%;
-  	top: 40%;
-  	right: 0%;
-  	bottom: 0%;
-  	left: 0%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-2);
-}
-.groupDiv {
-  	position: absolute;
-  	height: 69.08%;
-  	width: 15.79%;
-  	top: 20.91%;
-  	right: 42.11%;
-  	bottom: 10.01%;
-  	left: 42.11%;
-}
-.groupChild4 {
-  	position: absolute;
-  	height: 34.97%;
-  	width: 100%;
-  	top: 34.97%;
-  	right: -100%;
-  	bottom: 30.07%;
-  	left: 100%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-1);
-  	transform:  rotate(180deg);
-  	transform-origin: 0 0;
-}
-.groupChild5 {
-  	position: absolute;
-  	height: 83.92%;
-  	width: 100%;
-  	top: 16.28%;
-  	right: 0%;
-  	bottom: -0.2%;
-  	left: 0%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-2);
-}
-.rectangleParent2 {
-  	position: absolute;
-  	height: 75.85%;
-  	width: 15.79%;
-  	top: 8%;
-  	right: 0%;
-  	bottom: 16.15%;
-  	left: 84.21%;
-}
-.groupChild6 {
-  	position: absolute;
-  	height: 50.96%;
-  	width: 100%;
-  	top: 50.96%;
-  	right: -100%;
-  	bottom: -1.91%;
-  	left: 100%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-1);
-  	transform:  rotate(180deg);
-  	transform-origin: 0 0;
-}
-.groupChild7 {
-  	position: absolute;
-  	height: 70.06%;
-  	width: 100%;
-  	top: 29.76%;
-  	right: 0%;
-  	bottom: 0.18%;
-  	left: 0%;
-  	border-radius: var(--br-20);
-  	background: var(--gradient-2);
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white, #ffffff);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 5%; /* Fluidité à la place de 10px 100px */
+  box-sizing: border-box;
+  gap: 20px;
+  text-align: left;
+  font-size: var(--fs-14, 0.875rem);
+  color: var(--color-gray, #282D30);
+  font-family: var(--font-inter, sans-serif);
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    gap: 16px;
+  }
 }
 
+.sportseeParent {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+
+  @media (max-width: 850px) {
+    justify-content: center;
+  }
+}
+
+.sportsee {
+  position: relative;
+  white-space: nowrap;
+}
+
+.conditionsGnralesParent {
+  width: auto; /* Suppression du width: 264px fixe */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  @media (max-width: 850px) {
+    justify-content: center;
+    gap: 12px;
+  }
+}
+
+.contact {
+  position: relative;
+  white-space: nowrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconLogo {
+  height: 20.7px;
+  width: 19px;
+  position: relative;
+  transform: rotate(180deg);
+}
+
+/* --- Conservé pour les éléments graphiques du logo --- */
+.rectangleParent,
+.groupChild,
+.groupItem,
+.rectangleGroup,
+.groupInner,
+.rectangleDiv,
+.rectangleContainer,
+.groupChild2,
+.groupChild3,
+.groupDiv,
+.groupChild4,
+.groupChild5,
+.rectangleParent2,
+.groupChild6,
+.groupChild7 {
+  position: absolute;
+  box-sizing: border-box;
+}
