@@ -223,21 +223,13 @@ IMPORTANT: Pour TOUTES les séances (y compris le fractionné), tu dois obligato
     });
 
     if (!response.ok) {
-      const errorDetail = await response.text();
-      // 🔍 Affiche les détails d'erreur dans le terminal Node
-      console.error("❌ ERREUR MISTRAL DÉTAILLÉE :", errorDetail);
-      return res.status(response.status).json({ message: "Mistral API Error", errorDetail });
+      await response.text();
+      return res.status(response.status).json({ message: "Mistral API Error" });
     }
 
     const data = await response.json();
-    
-    // 🔍 Affiche la réponse brute envoyée par Mistral AI
-    console.log("🤖 RÉPONSE MISTRAL BRUTE :", JSON.stringify(data, null, 2));
 
     const parsedPlan = JSON.parse(data.choices[0].message.content);
-
-    // 🔍 Affiche le plan sous forme d'objet JavaScript parsé
-    console.log("📊 PLAN GÉNÉRÉ AVEC SUCCÈS :", parsedPlan);
 
     return res.json(parsedPlan);
   } catch (error) {

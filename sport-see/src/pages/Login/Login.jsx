@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Login from "../../components/Login/Login";
 import styles from "./Login.module.scss"; 
 import IconLogo from "../../components/Logo/Logo";

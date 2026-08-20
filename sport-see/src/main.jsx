@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { AuthProvider } from "./utils/context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import PlanGenerator from "./pages/PlanGenerator/PlanGenerator";
 import Profil from "./pages/Profil/Profil";
 import Logout from "./pages/Logout/Logout";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
   // --- ROUTE PUBLIQUE : Login (Pas de Header, pas d'authentification requise) ---
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard />, 
+        element: <Dashboard />,
       },
       {
         path: "/dashboard",
@@ -43,8 +44,12 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         element: <Logout />,
-      }
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

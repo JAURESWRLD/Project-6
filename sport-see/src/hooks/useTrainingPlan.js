@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { generateTrainingPlan } from '../mistralService'; 
+import { generateTrainingPlan } from '../utils/mistralService'; 
 
 export function useTrainingPlan() {
   const [loading, setLoading] = useState(false);

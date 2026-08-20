@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 // 1. On retire useNavigate car on ne change plus de page
-import { useTrainingPlan } from '../../utils/hooks/useTrainingPlan';
+import { useTrainingPlan } from '../../hooks/useTrainingPlan';
 
 export default function PlanGenerator() {
   const { fetchPlan, loading, error } = useTrainingPlan();

@@ -1,19 +1,12 @@
-import React from "react";
 import styles from "./MembreHeader.module.css";
-import { useFetch } from "../../utils/hooks";
-import { useAuth } from "../../utils/hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
+import { useUserInfo } from "../../hooks/useUserInfo";
 import IconLogo from "../Logo/Logo";
 
 const MemberHeader = () => {
   const { user } = useAuth();
-  const endpoint = `http://localhost:8000/api/user-info`;
-
-  const { data, loading, error } = useFetch(endpoint, {
-    headers: {
-      Authorization: `Bearer ${user?.token}`, // sécurisation
-      "Content-Type": "application/json",
-    },
-  });
+  const { data, loading, error } = useUserInfo(Boolean(user));
+  const assetUrl = import.meta.env.VITE_ASSET_URL;
 
   if (loading) {
     return (
@@ -43,13 +36,12 @@ const MemberHeader = () => {
   if (!data || !data.profile || !data.statistics) return null;
 
   const { firstName, lastName, createdAt, profilePicture } = data.profile;
-  const { totalDistance, totalSessions, totalDuration } = data.statistics;
+  const { totalDistance } = data.statistics;
 
-  // 2. Construction de l'URL d'image correcte
-const avatarUrl = profilePicture
+  const avatarUrl = profilePicture
   ? profilePicture.startsWith("http")
     ? profilePicture
-    : `http://localhost:8000${profilePicture.startsWith("/") ? "" : "/"}${profilePicture}`
+    : `${assetUrl}${profilePicture.startsWith("/") ? "" : "/"}${profilePicture}`
   : "";
 
   const joinDate = new Date(createdAt).toLocaleDateString("fr-FR", {
@@ -58,14 +50,11 @@ const avatarUrl = profilePicture
     year: "numeric",
   });
 
-  const durationHours = Math.floor(totalDuration / 60);
-  const durationMinutes = totalDuration % 60;
-
   return (
     		<div className={styles.headerProfil}>
       			<div className={styles.photoProfilParent}>
               <div className={styles.photoProfilCadre}>
-        				<img className={styles.photoProfilIcon} alt="" src={profilePicture} />
+        				<img className={styles.photoProfilIcon} alt="" src={avatarUrl} />
               </div>
               <div className={styles.claraDupontParent}>
                   <div className={styles.claraDupont}>{firstName} {lastName}</div>

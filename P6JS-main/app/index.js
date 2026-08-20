@@ -8,8 +8,10 @@ const bodyParser = require("body-parser");
 const router = require("./routes");
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+const frontendUrl = process.env.FRONTEND_URL;
+
+app.use(cors({ origin: frontendUrl, credentials: false }));
+app.use(bodyParser.json({ limit: "100kb" }));
 const port = 8000;
 
 app.use('/images', express.static(path.join(__dirname, '../images')));

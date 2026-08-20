@@ -1,7 +1,6 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
-import { useAuth } from "../../utils/hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import IconLogo from "../Logo/Logo";
 
 const Header = () => {
@@ -11,7 +10,7 @@ const Header = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
-    navigate("/Login");
+    navigate("/login");
   };
 
   return (

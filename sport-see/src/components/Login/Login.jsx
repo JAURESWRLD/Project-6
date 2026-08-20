@@ -1,6 +1,7 @@
 import styles from "./Login.module.css";
 import { useState } from "react";
-import { useAuth } from "../../utils/hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
+import { loginUser } from "../../services/authServices";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -12,20 +13,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8000/api/login", { 
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }), 
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
+    try {
+      const data = await loginUser({ username, password });
       login(data.token, { id: data.userId, username }); // stocke token + userId
       navigate("/dashboard");
-    } else {
-      console.error("Erreur de connexion", data.message);
-      alert("Identifiants incorrects");
+    } catch (error) {
+      alert(error.message || "Identifiants incorrects");
     }
   };
 

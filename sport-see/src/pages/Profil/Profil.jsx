@@ -1,17 +1,12 @@
-import React from "react";
 import styles from "./Profil.module.scss";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import { useFetch } from "../../utils/hooks";
-import { useAuth } from "../../utils/hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
+import { useUserInfo } from "../../hooks/useUserInfo";
 import IconLogo from "../../components/Logo/Logo";
 import PageTransition from "../../components/PageTransition";
 
 const Profil = () => {
   const { user } = useAuth();
-
-  const endpoint = user ? "http://localhost:8000/api/user-info" : null;
-  const { data, loading, error } = useFetch(endpoint);
+  const { data, loading, error } = useUserInfo(Boolean(user));
 
   if (loading) {
     return (
@@ -59,8 +54,6 @@ const Profil = () => {
   const parsedDuration = Number(totalDuration) || 0;
   const totalDurationHours = Math.floor(parsedDuration / 60);
   const totalDurationMinutes = parsedDuration % 60;
-  const totalDurationLabel = `${totalDurationHours}h ${totalDurationMinutes}min`;
-
   return (
     <>
     <PageTransition>

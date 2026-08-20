@@ -1,8 +1,11 @@
 // middleware.js
 const jwt = require("jsonwebtoken");
 
-// ⚠️ MÊME CLÉ POUR SIGNER ET POUR VÉRIFIER
-const SECRET_KEY = "Dxi90UGj2SINEgbTi99c1mlufLm1a00z"; 
+const SECRET_KEY = process.env.JWT_SECRET;
+
+if (!SECRET_KEY) {
+  throw new Error("JWT_SECRET is not defined in the backend environment");
+}
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -12,12 +15,8 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ message: "Token manquant" });
   }
 
-  // Debug pour vérifier dans les logs Node du terminal backend :
-  console.log("Token reçu dans le middleware :", token);
-
   jwt.verify(token, SECRET_KEY, (err, user) => {
     if (err) {
-      console.error("Erreur de vérification JWT :", err.message); // 👈 Utile pour debug dans ton terminal !
       return res.status(403).json({ message: "Invalid token" });
     }
     req.user = user;
@@ -26,7 +25,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 const generateToken = (userId) => {
-  return jwt.sign({ userId }, SECRET_KEY, { expiresIn: "24h" });
+  return jwt.sign({ userId }, SECRET_KEY, { expiresIn: "1h" });
 };
 
 module.exports = {

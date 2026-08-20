@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { useAuth } from "../utils/hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import Header from "./Header/Header"; 
 import Footer from "./Footer/Footer";
 

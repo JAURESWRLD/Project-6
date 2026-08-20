@@ -1,12 +1,17 @@
 export async function generateTrainingPlan(goalData) {
-  const token = localStorage.getItem('token');
-  const API_BASE_URL = "http://localhost:8000/api"; // Assure-toi du port et du chemin
+  let token = "";
+  try {
+    token = JSON.parse(sessionStorage.getItem("sportsee_user") || "null")?.token || "";
+  } catch {
+    token = "";
+  }
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   const response = await fetch(`${API_BASE_URL}/training-plan`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': token ? `Bearer ${token}` : ''
     },
     body: JSON.stringify(goalData) 
   });
